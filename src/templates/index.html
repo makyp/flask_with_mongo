@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask con Mongo</title>
+    <style>
+        body {
+            padding: 20px;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        h1 {
+            color: blueviolet;
+            margin-top: 50px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: blueviolet;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conectando Flask con Mongo</h1>
+    <form action="/guardar_personas" method="post">
+        <input type="text" name="nombre" placeholder="Nombre"><br>
+        <input type="text" name="apellido" placeholder="Apellido"><br>
+        <input type="text" name="telefono" placeholder="Telefono" pattern="[0-9]*"><br>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
