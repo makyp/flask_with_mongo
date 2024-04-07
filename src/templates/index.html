@@ -40,12 +40,31 @@
     </style>
 </head>
 <body>
-    <h1>Conectando Flask con Mongo</h1>
+    <h1>Agregar a una persona</h1>
     <form action="/guardar_personas" method="post">
         <input type="text" name="nombre" placeholder="Nombre"><br>
         <input type="text" name="apellido" placeholder="Apellido"><br>
         <input type="text" name="telefono" placeholder="Telefono" pattern="[0-9]*"><br>
         <button type="submit">Enviar</button>
     </form>
+    <h2>Lista de personas</h2>
+
+    {% for persona in personas%}
+    <form action="/editar_personas/{{persona.nombre}}" method="post">
+        <input type="text" name="nombre" value="{{persona.nombre}}">
+        <input type="text" name="apellido" value="{{persona.apellido}}">
+        <input type="text" name="telefono" value="{{persona.telefono}}">
+        <button type="submit">Actualizar</button>
+    </form> 
+    {%endfor%}
+    
+    <!-- <ul>
+        {% for persona in personas%}
+        <hr>
+        <li>Nombre: {{persona.nombre}}</li>
+        <li>Apellido: {{persona.apellido}}</li>
+        <li>Telefono: {{persona.telefono}}</li>
+        {%endfor%}
+    </ul> -->
 </body>
 </html>

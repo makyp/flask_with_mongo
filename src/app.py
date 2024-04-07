@@ -10,7 +10,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    colection_personas = con_bd['Personas']
+    #. find() Permite consultar la colección completa y lo almacena en un objeto
+    PersonasRegistradas = colection_personas.find()
+    
+    return render_template("index.html", personas = PersonasRegistradas)
 
 @app.route('/guardar_personas', methods=['POST'])
 def agregarPersona():
@@ -24,8 +28,28 @@ def agregarPersona():
         return redirect(url_for('index'))
     else: 
         return "Error"
+##Ruta para eliminar un dato   
+@app.route('/eliminar_persona/<string:nombre_persona>')
+def eliminar(nombre_persona):
+    colection_personas = con_bd['Personas']
+    colection_personas.delete_one({'nombre': nombre_persona})
+    return redirect(url_for('index'))
 
+@app.route("/editar_personas/<string:nombre_persona>", methods=['GET','POST'])
+def editar(nombre_persona):
+    colection_personas = con_bd['Personas']
+    ##Obtengo los datos del index para mostrarlos en el formulario de actualización
+    nombre = request.form['nombre']
+    apellido = request.form['apellido']
+    telefono = request.form['telefono']
+    if nombre and apellido and telefono:
+        ##el update_one solicita un identificador en este caso el nombre de las personas y los datos a modificar
+        colection_personas.update_one({'nombre':nombre_persona}, {'$set':{'nombre':nombre,'apellido':apellido, 'telefono': telefono}})
+        return redirect(url_for('index'))
+    else:
+        return "Error"
+
+
+  
 if __name__ == '__main__':
-    
-    
     app.run(debug=True, port=5555)
