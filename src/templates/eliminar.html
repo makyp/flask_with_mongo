@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask con Mongo</title>
+    <title>Eliminar Persona</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
 </head>
@@ -17,12 +17,16 @@
             </ul>
         </nav>
     </header>
-    <h1>Agregar a una persona</h1>
-    <form action="/guardar_personas" method="post">
-        <input type="text" name="nombre" placeholder="Nombre"><br>
-        <input type="text" name="apellido" placeholder="Apellido"><br>
-        <input type="text" name="telefono" placeholder="Telefono" pattern="[0-9]*"><br>
-        <button type="submit">Enviar</button>
+    <h1>Listado de Personas</h1>
+    <ul>
+        {% for persona in personas %}
+        <li>{{ persona.nombre }}</li>
+        {% endfor %}
+    </ul>
+    <h1>Eliminar Persona</h1>
+    <form action="/eliminar_persona" method="post">
+        <input type="text" name="nombre_persona" placeholder="Nombre de la persona a eliminar"><br>
+        <button type="submit">Eliminar</button>
     </form>
 </body>
 </html>

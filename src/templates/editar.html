@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask con Mongo</title>
+    <title>Editar Persona</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
 </head>
 <body>
     <header>
@@ -17,12 +16,14 @@
             </ul>
         </nav>
     </header>
-    <h1>Agregar a una persona</h1>
-    <form action="/guardar_personas" method="post">
-        <input type="text" name="nombre" placeholder="Nombre"><br>
-        <input type="text" name="apellido" placeholder="Apellido"><br>
-        <input type="text" name="telefono" placeholder="Telefono" pattern="[0-9]*"><br>
-        <button type="submit">Enviar</button>
+    <h1>Editar Personas</h1>
+    {% for persona in personas %}
+    <form action="/editar_personas/{{ persona.nombre }}" method="post">
+        <input type="text" name="nombre" value="{{ persona.nombre }}">
+        <input type="text" name="apellido" value="{{ persona.apellido }}">
+        <input type="text" name="telefono" value="{{ persona.telefono }}">
+        <br><button type="submit">Actualizar</button>
     </form>
+    {% endfor %} 
 </body>
 </html>
